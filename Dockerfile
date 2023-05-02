@@ -17,5 +17,8 @@ COPY . .
 ENV DJANGO_SETTINGS_MODULE=myproject.settings
 ENV PYTHONUNBUFFERED 1
 
+# 公开服务器端口
+EXPOSE 8000
+
 # 使用 Gunicorn 作为 Web 服务器，并指定运行 Django 应用程序的 WSGI 文件
 CMD ["gunicorn", "myproject.wsgi:application", "--bind", "0.0.0.0:8000"]
