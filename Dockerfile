@@ -1,5 +1,5 @@
 # Base image
-FROM python:3.8.5-slim
+FROM python:3.8-slim-buster
 
 # Working directory
 WORKDIR /app
@@ -16,3 +16,9 @@ EXPOSE 8000
 
 # Command to start the server
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "myproject.wsgi"]
+
+# 安装libpq-dev
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    libpq-dev && \
+    rm -rf /var/lib/apt/lists/*
