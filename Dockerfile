@@ -8,17 +8,11 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 安装libpq-dev
+# Install necessary dependencies for PostgreSQL and psycopg2
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    libpq-dev && \
+    libpq-dev postgresql-server-dev-all && \
     rm -rf /var/lib/apt/lists/*
-    
-# 添加pg_config配置文件
-RUN export PATH=$PATH:/usr/pgsql-9.6/bin/
-
-# 安装postgres
-RUN apt-get update && apt-get install -y postgresql postgresql-server-dev-all
 
 # Copy the rest of the project files
 COPY . .
